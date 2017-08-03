@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+  <div *ngFor="let x of patdata">
+
+  <ion-item style="display: none">
+
+  <ion-label >{{x.id}}</ion-label>
+
+  </ion-item>
+
+  <ion-item>
+
+  <ion-label>{{x.title}}</ion-label>
+
+  </ion-item>
+  <div *ngFor = "let y of x.questions">
+
+  	<ion-item>
+  	<ion-label class="myLbl">{{y.text}}</ion-label>
+  </ion-item>
+  <ion-item>
+
+  	<ion-input type="{{y.type}}" placeholder = "{{y.help}}"> </ion-input>
+
+  </ion-item>
+  <!-- <ion-item > -->
+  <ion-list radio-group *ngIf="y.type === 'radio'">
+  <ion-item>
+    <ion-label>Male
+    <ion-radio></ion-radio>
+    </ion-label>
+    </ion-item>
+    <ion-item>
+    <ion-label>Female
+    <ion-radio></ion-radio>
+    </ion-label>
+    </ion-item>
+    <!-- *ngIf=" tran.tranType == 'R'" -->
+    </ion-list>
+    <ion-item *ngIf="y.type === 'scale'">
+    <ion-range min="{{y.start}}" max="{{y.start}}">
+    </ion-range>
+    </ion-item>
+    <!-- </ion-item> -->
+
+
+  	<!-- ion-item>{{y.text}}
+
+  </ion-item> -->
+
+  </div>
+
+  </div>
+
+  <ion-item>
+    <button ion-button full (click) = "seeResults()">Submit</button>
+  </ion-item> 
+
+</ion-list>
+
+
+</ion-content>
