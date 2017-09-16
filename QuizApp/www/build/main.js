@@ -35,6 +35,9 @@ webpackEmptyAsyncContext.id = 148;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup_signup__ = __webpack_require__(193);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_storage__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ts_md5_dist_md5__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ts_md5_dist_md5___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ts_md5_dist_md5__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -48,6 +51,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//IMPORT LOCAL STORAGE
+
+//SECURiTY FEATURE: MD5 PASSWORD ENCRYPTION MODULE
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -55,9 +62,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * on Ionic pages and navigation.
  */
 var LoginPage = (function () {
-    function LoginPage(navCtrl, navParams) {
+    function LoginPage(navCtrl, navParams, storage) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.storage = storage;
+        this.userInput = { 'email': '', 'password': '' };
     }
     LoginPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad LoginPage');
@@ -66,17 +75,27 @@ var LoginPage = (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__signup_signup__["a" /* SignupPage */]);
     };
     LoginPage.prototype.goToHome = function () {
+        this.saveUserInputLocally();
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
+    };
+    //Local Storage Implementation
+    LoginPage.prototype.saveUserInputLocally = function () {
+        this.storage.set("USER_EMAIL", this.userInput.email);
+        //PASSWORD MD5 ENCRYPTION
+        var passwordmd5 = __WEBPACK_IMPORTED_MODULE_5_ts_md5_dist_md5__["Md5"].hashStr(this.userInput.password).toString();
+        console.log("password md5 is : " + passwordmd5);
+        this.storage.set("USER_PASSWORD", passwordmd5);
     };
     return LoginPage;
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-login',template:/*ion-inline-start:"/Users/Mohmmad/Desktop/QuizApp(final)/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<ion-list style="margin-top: 25%">\n\n  <ion-item>\n    <ion-label fixed>Username</ion-label>\n    <ion-input type="text" value=""></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label fixed>Password</ion-label>\n    <ion-input type="password"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <button ion-button full (click) = "goToHome()">Login</button>\n  </ion-item>\n\n\n<ion-item>\n<button ion-button full color="red" (click)="register()">Register</button>\n</ion-item>\n</ion-list>\n \n\n\n</ion-content>\n'/*ion-inline-end:"/Users/Mohmmad/Desktop/QuizApp(final)/src/pages/login/login.html"*/,
+        selector: 'page-login',template:/*ion-inline-start:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/pages/login/login.html"*/'<!--\n  Generated template for the LoginPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>login</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<ion-list style="margin-top: 25%">\n\n  <ion-item>\n    <ion-label fixed>Username</ion-label>\n    <ion-input type="text" [(ngModel)]="userInput.email" value=""></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label fixed>Password</ion-label>\n    <ion-input type="password" [(ngModel)]="userInput.password"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <button ion-button full (click) = "goToHome()">Login</button>\n  </ion-item>\n\n\n<ion-item>\n<button ion-button full color="red" (click)="register()">Register</button>\n</ion-item>\n</ion-list>\n \n\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/pages/login/login.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_storage__["b" /* Storage */]) === "function" && _c || Object])
 ], LoginPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=login.js.map
 
 /***/ }),
@@ -117,7 +136,7 @@ var SignupPage = (function () {
 }());
 SignupPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-signup',template:/*ion-inline-start:"/Users/Mohmmad/Desktop/QuizApp(final)/src/pages/signup/signup.html"*/'<!--\n  Generated template for the SignupPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>signup</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n<ion-list style="margin-top: 25%">\n\n  <ion-item>\n    <ion-label fixed>Username</ion-label>\n    <ion-input type="text" value=""></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label fixed>Email</ion-label>\n    <ion-input type="Email"></ion-input>\n  </ion-item>\n\n\n  <ion-item>\n    <ion-label fixed>Password</ion-label>\n    <ion-input type="password"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label >Confirm Password</ion-label>\n    <ion-input type="password"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <button ion-button full>Save</button>\n  </ion-item>\n\n\n\n</ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Mohmmad/Desktop/QuizApp(final)/src/pages/signup/signup.html"*/,
+        selector: 'page-signup',template:/*ion-inline-start:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/pages/signup/signup.html"*/'<!--\n  Generated template for the SignupPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>signup</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n<ion-list style="margin-top: 25%">\n\n  <ion-item>\n    <ion-label fixed>Username</ion-label>\n    <ion-input type="text" value=""></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label fixed>Email</ion-label>\n    <ion-input type="Email"></ion-input>\n  </ion-item>\n\n\n  <ion-item>\n    <ion-label fixed>Password</ion-label>\n    <ion-input type="password"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label >Confirm Password</ion-label>\n    <ion-input type="password"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <button ion-button full>Save</button>\n  </ion-item>\n\n\n\n</ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/pages/signup/signup.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
 ], SignupPage);
@@ -167,7 +186,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Mohmmad/Desktop/QuizApp(final)/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Ionic Blank\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n  <div *ngFor="let x of patdata">\n\n  <ion-item style="display: none">\n\n  <ion-label >{{x.id}}</ion-label>\n\n  </ion-item>\n\n  <ion-item>\n\n  <ion-label>{{x.title}}</ion-label>\n\n  </ion-item>\n  <div *ngFor = "let y of x.questions">\n\n  	<ion-item>\n  	<ion-label class="myLbl">{{y.text}}</ion-label>\n  </ion-item>\n  <ion-item>\n\n  	<ion-input type="{{y.type}}" placeholder = "{{y.help}}"> </ion-input>\n\n  </ion-item>\n  <!-- <ion-item > -->\n  <ion-list radio-group *ngIf="y.type === \'radio\'">\n  <ion-item>\n    <ion-label>Male\n    <ion-radio></ion-radio>\n    </ion-label>\n    </ion-item>\n    <ion-item>\n    <ion-label>Female\n    <ion-radio></ion-radio>\n    </ion-label>\n    </ion-item>\n    <!-- *ngIf=" tran.tranType == \'R\'" -->\n    </ion-list>\n    <ion-item *ngIf="y.type === \'scale\'">\n    <ion-range min="{{y.start}}" max="{{y.start}}">\n    </ion-range>\n    </ion-item>\n    <!-- </ion-item> -->\n\n\n  	<!-- ion-item>{{y.text}}\n\n  </ion-item> -->\n\n  </div>\n\n  </div>\n\n  <ion-item>\n    <button ion-button full (click) = "seeResults()">Submit</button>\n  </ion-item> \n\n</ion-list>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/Mohmmad/Desktop/QuizApp(final)/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Ionic Blank\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n  <div *ngFor="let x of patdata">\n\n  <ion-item style="display: none">\n\n  <ion-label >{{x.id}}</ion-label>\n\n  </ion-item>\n\n  <ion-item>\n\n  <ion-label>{{x.title}}</ion-label>\n\n  </ion-item>\n  <div *ngFor = "let y of x.questions">\n\n  	<ion-item>\n  	<ion-label class="myLbl">{{y.text}}</ion-label>\n  </ion-item>\n  <ion-item>\n\n  	<ion-input type="{{y.type}}" placeholder = "{{y.help}}"> </ion-input>\n\n  </ion-item>\n  <!-- <ion-item > -->\n  <ion-list radio-group *ngIf="y.type === \'radio\'">\n  <ion-item>\n    <ion-label>Male\n    <ion-radio></ion-radio>\n    </ion-label>\n    </ion-item>\n    <ion-item>\n    <ion-label>Female\n    <ion-radio></ion-radio>\n    </ion-label>\n    </ion-item>\n    <!-- *ngIf=" tran.tranType == \'R\'" -->\n    </ion-list>\n    <ion-item *ngIf="y.type === \'scale\'">\n    <ion-range min="{{y.start}}" max="{{y.start}}">\n    </ion-range>\n    </ion-item>\n    <!-- </ion-item> -->\n\n\n  	<!-- ion-item>{{y.text}}\n\n  </ion-item> -->\n\n  </div>\n\n  </div>\n\n  <ion-item>\n    <button ion-button full (click) = "seeResults()">Submit</button>\n  </ion-item> \n\n</ion-list>\n\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_services_services__["a" /* ServicesProvider */]])
 ], HomePage);
@@ -292,7 +311,7 @@ var ResultsPage = (function () {
 }());
 ResultsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-results',template:/*ion-inline-start:"/Users/Mohmmad/Desktop/QuizApp(final)/src/pages/results/results.html"*/'<!--\n  Generated template for the ResultsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>results</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<ion-card>\n  <ion-card-header>\n    Result/summary\n  </ion-card-header>\n  <ion-card-content>\n  <img src="assets/images.png">\n  <ion-list>\n  <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Total Questions</h3>\n                <ion-note item-right style="color: black">5</ion-note>\n            </ion-item>\n            <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Time</h3>\n                <ion-note item-right style="color: black">15 min</ion-note>\n            </ion-item>\n            <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Attempt</h3>\n                <ion-note item-right style="color: black">3</ion-note>\n            </ion-item>\n            <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Correct</h3>\n                <ion-note item-right style="color: black">2</ion-note>\n            </ion-item>\n            <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Results</h3>\n                <ion-note item-right style="color: green">Pass</ion-note>\n            </ion-item>\n            <ion-item>\n            <button ion-button block (click)="Done()">Done</button>\n            </ion-item>\n  </ion-list>\n    \n  </ion-card-content>\n</ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/Mohmmad/Desktop/QuizApp(final)/src/pages/results/results.html"*/,
+        selector: 'page-results',template:/*ion-inline-start:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/pages/results/results.html"*/'<!--\n  Generated template for the ResultsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>results</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<ion-card>\n  <ion-card-header>\n    Result/summary\n  </ion-card-header>\n  <ion-card-content>\n  <img src="assets/images.png">\n  <ion-list>\n  <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Total Questions</h3>\n                <ion-note item-right style="color: black">5</ion-note>\n            </ion-item>\n            <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Time</h3>\n                <ion-note item-right style="color: black">15 min</ion-note>\n            </ion-item>\n            <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Attempt</h3>\n                <ion-note item-right style="color: black">3</ion-note>\n            </ion-item>\n            <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Correct</h3>\n                <ion-note item-right style="color: black">2</ion-note>\n            </ion-item>\n            <ion-item>\n                <!-- <ion-icon item-left name="leaf"></ion-icon> -->\n                <h3>Results</h3>\n                <ion-note item-right style="color: green">Pass</ion-note>\n            </ion-item>\n            <ion-item>\n            <button ion-button block (click)="Done()">Done</button>\n            </ion-item>\n  </ion-list>\n    \n  </ion-card-content>\n</ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/pages/results/results.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
 ], ResultsPage);
@@ -328,10 +347,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_signup_signup__ = __webpack_require__(193);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(267);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_home_home__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_results_results__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_services_services__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_storage__ = __webpack_require__(268);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -350,6 +370,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+//IMPORT LOCAL STORAGE MODULE
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -367,7 +389,8 @@ AppModule = __decorate([
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_7__angular_http__["b" /* HttpModule */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */])
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */]),
+            __WEBPACK_IMPORTED_MODULE_12__ionic_storage__["a" /* IonicStorageModule */].forRoot(),
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
         entryComponents: [
@@ -390,7 +413,7 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 266:
+/***/ 267:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -427,7 +450,7 @@ var MyApp = (function () {
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/Mohmmad/Desktop/QuizApp(final)/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/Mohmmad/Desktop/QuizApp(final)/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Volumes/Data/FLP Data/Assignment Falak/Quiz app cloned/QuizAppProject1/QuizApp/src/app/app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
